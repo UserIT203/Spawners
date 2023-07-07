@@ -304,7 +304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6974915d44cb9348b6f977991fc7d86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTemplate: {fileID: 4691871806450959292, guid: 7aef2c19070496a43bfe8fe1a448c232, type: 3}
+  _enemyTemplate: {fileID: 2030410247168253828, guid: 7aef2c19070496a43bfe8fe1a448c232, type: 3}
   _timeToSpawn: 2
 --- !u!4 &977350799
 Transform:

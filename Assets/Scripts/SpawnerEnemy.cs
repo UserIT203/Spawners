@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnerEnemy : MonoBehaviour
 {
-    [SerializeField] private Enemy _enemyTemplate;
+    [SerializeField] private GameObject _enemyTemplate;
     [SerializeField] private float _timeToSpawn;
 
     private Transform[] _spawners;
@@ -26,7 +26,8 @@ public class SpawnerEnemy : MonoBehaviour
     private void CreateEnemy(int spawnerIndex)
     {
         float shiftPositionY = Random.Range(-0.5f, 0.5f);
-        Vector3 enemyPosition = new Vector3(_spawners[spawnerIndex].position.x, _spawners[spawnerIndex].position.y + shiftPositionY, 
+        Vector3 enemyPosition = new Vector3(_spawners[spawnerIndex].position.x, 
+            _spawners[spawnerIndex].position.y + shiftPositionY, 
             _spawners[spawnerIndex].position.z);
 
         var enemy = Instantiate(_enemyTemplate, enemyPosition, Quaternion.identity);
@@ -35,20 +36,19 @@ public class SpawnerEnemy : MonoBehaviour
 
     private IEnumerator Spawn()
     {
-
         int currentSpawnerIndex = 0;
+        var waitForSpawnTimeSecond = new WaitForSeconds(_timeToSpawn);
 
         while (_isSpawn)
         {
             CreateEnemy(currentSpawnerIndex);
 
-            yield return new WaitForSeconds(_timeToSpawn);
+            yield return waitForSpawnTimeSecond;
 
             currentSpawnerIndex++;
 
             if (currentSpawnerIndex >= _spawners.Length)
                 currentSpawnerIndex = 0;
-
         }
     }
 }
