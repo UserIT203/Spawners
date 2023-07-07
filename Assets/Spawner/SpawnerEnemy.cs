@@ -2,24 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnEnemy : MonoBehaviour
+public class SpawnerEnemy : MonoBehaviour
 {
-    [SerializeField] private GameObject _enemyTemplate;
+    [SerializeField] private Enemy _enemyTemplate;
     [SerializeField] private float _timeToSpawn;
 
-    private float _currentTimeToSpawn;
     private Transform[] _spawners;
-    private int _currentSpawnerIndex;
+    private bool _isSpawn;
 
     private void Start()
     {
         _spawners = new Transform[transform.childCount];
-        _currentTimeToSpawn = 0;
+        _isSpawn = true;
 
         for (int i = 0; i < transform.childCount; i++)
         {
             _spawners[i] = transform.GetChild(i);
         }
+
+        StartCoroutine(Spawn());
     }
 
     private void CreateEnemy(int spawnerIndex)
@@ -32,19 +33,22 @@ public class SpawnEnemy : MonoBehaviour
         enemy.transform.SetParent(_spawners[spawnerIndex]);
     }
 
-    private void Update()
+    private IEnumerator Spawn()
     {
-        _currentTimeToSpawn += Time.deltaTime;
 
-        if(_currentTimeToSpawn >= _timeToSpawn)
+        int currentSpawnerIndex = 0;
+
+        while (_isSpawn)
         {
-            _currentTimeToSpawn = 0;
+            CreateEnemy(currentSpawnerIndex);
 
-            if (_currentSpawnerIndex >= _spawners.Length)
-                _currentSpawnerIndex = 0;
+            yield return new WaitForSeconds(_timeToSpawn);
 
-            CreateEnemy(_currentSpawnerIndex);
-            _currentSpawnerIndex++;
+            currentSpawnerIndex++;
+
+            if (currentSpawnerIndex >= _spawners.Length)
+                currentSpawnerIndex = 0;
+
         }
     }
 }
