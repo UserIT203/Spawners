@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 370662d696e11b849bca1f0be8f00735, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyTemplate: {fileID: 4691871806450959292, guid: 7aef2c19070496a43bfe8fe1a448c232, type: 3}
+  _enemyTemplate: {fileID: 2896639874256952938, guid: 7aef2c19070496a43bfe8fe1a448c232, type: 3}
   _timeToSpawn: 2
 --- !u!1001 &1026959422
 PrefabInstance:
